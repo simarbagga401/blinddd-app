@@ -38,7 +38,7 @@ const retryDate = () => {
 </script>
 
 <template>
-  <img v-if="match == 'Date not found'" src="../../SVG/2.svg" alt="" />
+  <img v-if="match == 'Date not found'" src="~/assets/SVG/2.svg" alt="" />
   <div v-if="match == 'Date not found'">
     <h1>Date will be Found Soon!</h1>
     <p>Come back again after a while...</p>
