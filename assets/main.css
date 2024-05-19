@@ -1,0 +1,17 @@
+@import './base.css';
+
+body{
+  margin:0;
+}
+
+#app {
+  width: 100vw;
+  height:100vh;
+  margin:auto;
+}
+
+:root {
+  --slider-connect-bg: #673ab7;
+  --slider-tooltip-bg: #673ab7;
+  --slider-handle-ring-color: #673ab7;
+}
