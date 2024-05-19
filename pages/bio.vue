@@ -2,11 +2,9 @@
 import InputText from 'primevue/inputtext'
 import Button from 'primevue/button'
 
-import router from '@/router'
-import { useDatesStore } from '@/stores/dates_store'
-import axios from 'axios'
 import { serverUrl } from '@/assets/serverUrl'
-const store = useDatesStore()
+import { useDatesStore } from "@/stores/dates_store";
+const store = useDatesStore();
 
 const formData = new FormData()
 
@@ -28,15 +26,14 @@ const handleImage = (e) => {
 }
 
 const formSubmitted = () => {
-  axios
-    .post(`${serverUrl}/upload_image`, formData, {
-      headers: { 'Content-Type': 'multipart/form-data' }
-    })
+  $fetch(`${serverUrl}/upload_image`, { method: 'POST', body: formData }, {
+    headers: { 'Content-Type': 'multipart/form-data' }
+  })
     .then((res) => {
-      console.log(res.data)
+      console.log(res)
     })
     .catch((err) => console.log(err))
-  router.push('/filter')
+  navigateTo('/filter')
 }
 </script>
 
@@ -68,14 +65,17 @@ const formSubmitted = () => {
   align-items: center;
   justify-content: center;
 }
+
 img {
   width: clamp(130px, 40%, 200px);
   border-radius: 7px;
 }
+
 section {
   height: 150px;
   width: 20%;
 }
+
 .heading {
   font-weight: 500;
   font-size: 20px;
@@ -85,6 +85,7 @@ section {
   header {
     align-items: flex-start;
   }
+
   #username {
     width: 100px;
   }

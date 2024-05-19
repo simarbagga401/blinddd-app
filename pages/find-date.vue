@@ -1,37 +1,40 @@
 <script setup>
-import Button from 'primevue/button'
+import Button from "primevue/button";
 
-import axios from 'axios'
-import { onMounted } from 'vue'
-import { useDatesStore } from '@/stores/dates_store'
-import { ref } from 'vue'
-import { serverUrl } from '@/assets/serverUrl'
-import router from '@/router'
-const store = useDatesStore()
+import { serverUrl } from "@/assets/serverUrl";
+import { useDatesStore } from "@/stores/dates_store";
+const store = useDatesStore();
 
-let match = ref('loading')
+let match = ref("Date not found");
 
 onMounted(async () => {
   try {
-    const data = await axios.post(`${serverUrl}/find_match`, { username: store.username })
-    console.log(data)
-    if (data.data == 'not found' || data.data == '') {
-      match.value = 'Date not found'
+    const data = await $fetch(`${serverUrl}/find_match`, {
+      method: "POST",
+      body: { username: store.username },
+    });
+    console.log(data);
+    if (data == "not found" || data == "") {
+      match.value = "Date not found";
     } else {
-      match.value = data.data
+      match.value = data;
     }
   } catch (error) {
-    console.log(error)
+    console.log(error);
   }
-})
+});
 
 const retryDate = () => {
-  axios
-    .post(`${serverUrl}/retry_date`, { username: store.username, match: match.value.match })
+  $fetch(`${serverUrl}/retry_date`, {
+    body: {
+      username: store.username,
+      match: match.value.match,
+    }, method: 'POST'
+  })
     .then((res) => console.log(res))
-    .catch((e) => console.log(e))
-    router.push('/filter')
-}
+    .catch((e) => console.log(e));
+  navigateTo("/filter");
+};
 </script>
 
 <template>
@@ -54,17 +57,20 @@ const retryDate = () => {
 </template>
 
 <style scoped>
-.danger{
-background: #ff4e4e;
+.danger {
+  background: #ff4e4e;
 }
+
 span {
   font-weight: bold;
 }
+
 div {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
+
 img {
   width: clamp(200px, 40%, 400px);
   border-radius: 7px;

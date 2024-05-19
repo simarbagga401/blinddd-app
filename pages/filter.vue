@@ -3,30 +3,29 @@ import Slider from 'primevue/slider'
 import Dropdown from 'primevue/dropdown'
 import Button from 'primevue/button'
 
-import router from '@/router'
-import { useDatesStore } from '@/stores/dates_store'
 import MultiSlider from '@vueform/slider'
-import axios from 'axios'
-import { ref } from 'vue'
 import { serverUrl } from '@/assets/serverUrl'
-const store = useDatesStore()
+import { useDatesStore } from "@/stores/dates_store";
+const store = useDatesStore();
+
 
 const formSubmitted = () => {
   console.log('finding date')
-  axios
-    .post(`${serverUrl}/find_date`, {
-      username: store.username,
-      instagram: store.instagram,
-      age: store.age,
-      gender: store.gender.name,
-      dates_gender: store.dates_gender.name,
-      age_range: store.age_range,
-      match: store.match
+  $fetch(`${serverUrl}/find_date`, {
+      method: 'POST', body: {
+        username: store.username,
+        instagram: store.instagram,
+        age: store.age,
+        gender: store.gender.name,
+        dates_gender: store.dates_gender.name,
+        age_range: store.age_range,
+        match: store.match
+      }
     })
     .then((res) => {
       setTimeout(() => {
         console.log('wating 2 secs')
-        router.push('/find_date')
+        navigateTo('/find-date')
         console.log(res.data)
       }, 500)
     })
@@ -46,24 +45,14 @@ const genderOptions = ref([{ name: 'Man' }, { name: 'Woman' }])
 
     <section>
       <h1 class="heading">Gender</h1>
-      <Dropdown
-        v-model="store.gender"
-        :options="genderOptions"
-        optionLabel="name"
-        placeholder="Your Gender"
-        class="w-full md:w-14rem"
-      />
+      <Dropdown v-model="store.gender" :options="genderOptions" optionLabel="name" placeholder="Your Gender"
+        class="w-full md:w-14rem" />
     </section>
 
     <section>
       <h1 class="heading">Date's Gender</h1>
-      <Dropdown
-        v-model="store.dates_gender"
-        :options="genderOptions"
-        optionLabel="name"
-        placeholder="Date's Gender"
-        class="w-full md:w-14rem"
-      />
+      <Dropdown v-model="store.dates_gender" :options="genderOptions" optionLabel="name" placeholder="Date's Gender"
+        class="w-full md:w-14rem" />
     </section>
 
     <section>
@@ -86,6 +75,7 @@ const genderOptions = ref([{ name: 'Man' }, { name: 'Woman' }])
   align-items: center;
   justify-content: center;
 }
+
 section {
   height: 150px;
   width: 20%;
@@ -93,6 +83,7 @@ section {
   flex-direction: column;
   justify-content:space-evenly; */
 }
+
 .heading {
   font-weight: 500;
   font-size: 20px;
@@ -102,6 +93,7 @@ section {
   header {
     align-items: flex-start;
   }
+
   #username {
     width: 100px;
   }

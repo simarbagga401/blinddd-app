@@ -4,16 +4,15 @@ import InputText from "primevue/inputtext";
 
 import { serverUrl } from "@/assets/serverUrl";
 import { useDatesStore } from "@/stores/dates_store";
-import { ref } from "vue";
 const store = useDatesStore();
-const router = useRoute();
+
 
 let signUpState = ref(false);
 let signUpData = ref();
 let signInData = ref();
 
 const signIn = () => {
-  $fetch(`${serverUrl}/sign_in`, {  
+  $fetch(`${serverUrl}/sign_in`, {
     method: "POST",
     body: {
       username: store.username,
@@ -21,31 +20,39 @@ const signIn = () => {
     },
   })
     .then(async (data) => {
-      if (data.data.msg == "sign in successful") {
-        const match = await axios.post(`${serverUrl}/check_match`, {
-          username: store.username,
+      if (data.msg == "sign in successful") {
+        const match = await $fetch(`${serverUrl}/check_match`, {
+          method: 'POST',
+          body: {
+            username: store.username,
+          }
         });
-        if (match.data == "") {
-          router.push("/bio");
+        if (match == "") {
+          navigateTo('/bio')
         } else {
-          router.push("/find_date");
+          navigateTo('/find-date')
         }
-        signInData.value = data.data.msg;
+        signInData.value = data.msg;
       } else {
-        signInData.value = data.data.msg;
+        signInData.value = data.msg;
       }
     })
     .catch((err) => console.log(err));
 };
 
 const signUp = () => {
-  axios
-    .post(`${serverUrl}/sign_up`, {
-      username: store.username,
-      password: store.password,
-    })
+  $fetch(
+    `${serverUrl}/sign_up`,
+    {
+      method: "POST", body: {
+
+        username: store.username,
+        password: store.password,
+      }
+    }
+  )
     .then((data) => {
-      signUpData.value = data.data;
+      signUpData.value = data;
       console.log(data);
     })
     .catch((err) => console.log(err));
@@ -62,12 +69,7 @@ const signUp = () => {
         <p>Username</p>
         <InputText id="username" v-model="store.username" required />
         <p>Password</p>
-        <InputText
-          type="password"
-          id="password"
-          v-model="store.password"
-          required
-        />
+        <InputText type="password" id="password" v-model="store.password" required />
         <Button class="btn" type="submit">sign up</Button>
         <p class="instead" @click="signUpState = !signUpState">
           Sign in instead
@@ -80,12 +82,7 @@ const signUp = () => {
         <p>Username</p>
         <InputText id="username" v-model="store.username" required />
         <p>Password</p>
-        <InputText
-          type="password"
-          id="password"
-          v-model="store.password"
-          required
-        />
+        <InputText type="password" id="password" v-model="store.password" required />
         <Button class="btn" type="submit">sign in</Button>
         <p class="instead" @click="signUpState = !signUpState">
           Sign up instead
@@ -96,19 +93,5 @@ const signUp = () => {
 </template>
 
 <style scoped>
-main {
-  display: flex;
-  width: 100%;
-  height: 100%;
-}
-.btn {
-  margin-left: 10px;
-  margin-top: 10px;
-}
-p.instead {
-  text-decoration: underline;
-}
-img {
-  width: clamp(200px, 20%, 400px);
-}
+@import url("~/assets/css/index.css");
 </style>

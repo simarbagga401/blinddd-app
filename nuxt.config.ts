@@ -1,9 +1,9 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   devtools: { enabled: true },
-  css:['~/assets/main.css'],
-  modules: [
-    'nuxt-primevue',
-    '@pinia/nuxt',
-],
-})
+  css: [
+    "~/assets/css/main.css",
+    "primevue/resources/themes/md-light-deeppurple/theme.css",
+  ],
+  modules: ["nuxt-primevue", "@pinia/nuxt"],
+});
