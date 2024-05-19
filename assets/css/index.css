@@ -16,3 +16,6 @@ img {
 p.instead {
   text-decoration: underline;
 }
+.danger{
+  color:#ff2d2d;
+}

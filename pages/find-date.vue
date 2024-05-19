@@ -58,7 +58,7 @@ const retryDate = () => {
 
 <style scoped>
 .danger {
-  background: #ff4e4e;
+  background: #ff2d2d;
 }
 
 span {
