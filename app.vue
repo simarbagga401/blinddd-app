@@ -41,6 +41,7 @@ header {
   text-decoration: underline;
   align-self: center;
   justify-self: end;
+  cursor: pointer;
 }
 
 main {

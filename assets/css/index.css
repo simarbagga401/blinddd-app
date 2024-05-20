@@ -15,6 +15,7 @@ img {
 
 p.instead {
   text-decoration: underline;
+  cursor:pointer;
 }
 .danger{
   color:#ff2d2d;
