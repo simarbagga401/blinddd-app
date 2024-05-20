@@ -18,7 +18,6 @@ const signIn = () => {
         .then(async (data) => {
             if (data.msg == "sign in successful") {
                 localStorage.setItem("username",store.username)
-                store.signedIn = true;
                 const match = await $fetch(`${serverUrl}/check_match`, {
                     method: 'POST',
                     body: {
@@ -26,9 +25,11 @@ const signIn = () => {
                     }
                 });
                 if (match == "") {
-                    navigateTo('/bio')
+                   await navigateTo('/bio')
+                   location.reload()
                 } else {
-                    navigateTo('/')
+                    await  navigateTo('/')
+                    location.reload()
                 }
                 signInData.value = data.msg;
             } else {

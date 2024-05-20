@@ -2,15 +2,25 @@
 import { useDatesStore } from "@/stores/dates_store";
 const store = useDatesStore();
 let signUpState = ref(false);
+let user = ref('null');
+onMounted(() => {
+  user.value = localStorage.getItem("username");
+});
 </script>
 
 <template>
-  <main v-if="!store.signedIn">
+  <main v-if="user === null || user === 'null' ">
     <img src="~/assets/SVG/3.svg" alt="" />
     <div>
-      <SignUp v-show="signUpState" @changeSignUpState="(bool) => (signUpState = bool)" />
+      <SignUp
+        v-show="signUpState"
+        @changeSignUpState="(bool) => (signUpState = bool)"
+      />
       <br />
-      <SignIn v-show="!signUpState" @changeSignUpState="(bool) => (signUpState = bool)" />
+      <SignIn
+        v-show="!signUpState"
+        @changeSignUpState="(bool) => (signUpState = bool)"
+      />
     </div>
   </main>
   <main v-else>

@@ -2,8 +2,13 @@
 import { useDatesStore } from "@/stores/dates_store";
 const store = useDatesStore();
 
-const signOut = () => {
-  navigateTo('/')
+let user:Ref<string | null> = ref('null');
+onMounted(() => {
+  user.value = localStorage.getItem("username");
+});
+
+const signOut = async() => {
+  await navigateTo("/");
   localStorage.setItem("username", "null");
   location.reload();
 };
@@ -15,7 +20,9 @@ const signOut = () => {
       <NuxtLink to="/" class="logo">
         Blinddd <i>Straightforward way to dating</i>
       </NuxtLink>
-      <p v-if="store.signedIn" class="sign-out" @click="signOut">sign out</p>
+      <p v-if="user !== 'null' && user !== null" class="sign-out" @click="signOut">
+        sign out
+      </p>
     </header>
     <NuxtPage />
   </main>
@@ -32,7 +39,7 @@ header {
 .sign-out {
   color: #ff2d2d;
   text-decoration: underline;
-  align-self: flex-end;
+  align-self: center;
   justify-self: end;
 }
 

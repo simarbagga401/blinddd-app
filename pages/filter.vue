@@ -1,38 +1,38 @@
 <script setup>
-import Slider from 'primevue/slider'
-import Dropdown from 'primevue/dropdown'
-import Button from 'primevue/button'
+import Slider from "primevue/slider";
+import Dropdown from "primevue/dropdown";
+import Button from "primevue/button";
 
-import MultiSlider from '@vueform/slider'
-import { serverUrl } from '@/assets/serverUrl'
+import MultiSlider from "@vueform/slider";
+import { serverUrl } from "@/assets/serverUrl";
 import { useDatesStore } from "@/stores/dates_store";
 const store = useDatesStore();
 
-
 const formSubmitted = () => {
-  console.log('finding date')
+  console.log("finding date");
   $fetch(`${serverUrl}/find_date`, {
-      method: 'POST', body: {
-        username: store.username,
-        instagram: store.instagram,
-        age: store.age,
-        gender: store.gender.name,
-        dates_gender: store.dates_gender.name,
-        age_range: store.age_range,
-        match: store.match
-      }
-    })
+    method: "POST",
+    body: {
+      username: localStorage.getItem("username"),
+      instagram: store.instagram,
+      age: store.age,
+      gender: store.gender.name,
+      dates_gender: store.dates_gender.name,
+      age_range: store.age_range,
+      match: store.match,
+    },
+  })
     .then((res) => {
       setTimeout(() => {
-        console.log('wating 2 secs')
-        navigateTo('/')
-        console.log(res)
-      }, 500)
+        console.log("wating 2 secs");
+        navigateTo("/");
+        console.log(res);
+      }, 500);
     })
-    .catch((err) => console.log(err))
-}
+    .catch((err) => console.log(err));
+};
 
-const genderOptions = ref([{ name: 'Man' }, { name: 'Woman' }])
+const genderOptions = ref([{ name: "Man" }, { name: "Woman" }]);
 </script>
 
 <template>
@@ -45,19 +45,34 @@ const genderOptions = ref([{ name: 'Man' }, { name: 'Woman' }])
 
     <section>
       <h1 class="heading">Gender</h1>
-      <Dropdown v-model="store.gender" :options="genderOptions" optionLabel="name" placeholder="Your Gender"
-        class="w-full md:w-14rem" />
+      <Dropdown
+        v-model="store.gender"
+        :options="genderOptions"
+        optionLabel="name"
+        placeholder="Your Gender"
+        class="w-full md:w-14rem"
+      />
     </section>
 
     <section>
       <h1 class="heading">Date's Gender</h1>
-      <Dropdown v-model="store.dates_gender" :options="genderOptions" optionLabel="name" placeholder="Date's Gender"
-        class="w-full md:w-14rem" />
+      <Dropdown
+        v-model="store.dates_gender"
+        :options="genderOptions"
+        optionLabel="name"
+        placeholder="Date's Gender"
+        class="w-full md:w-14rem"
+      />
     </section>
 
     <section>
       <h1 class="heading">Age Range</h1>
-      <MultiSlider class="slider-purple" :min="18" :max="80" v-model="store.age_range" />
+      <MultiSlider
+        class="slider-purple"
+        :min="18"
+        :max="80"
+        v-model="store.age_range"
+      />
     </section>
 
     <Button type="submit">Find date</Button>

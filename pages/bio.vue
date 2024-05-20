@@ -21,7 +21,7 @@ const handleImage = (e) => {
     reader.readAsDataURL(e.target.files[0])
 
     formData.append('file', e.target.files[0])
-    formData.append('username', store.username)
+    formData.append('username', localStorage.getItem('username'))
   }
 }
 

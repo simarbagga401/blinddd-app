@@ -11,7 +11,6 @@ export const useDatesStore = defineStore("dates", {
       age_range: [18, 25],
       match: null,
       instagram: "",
-      signedIn:false,
     };
   },
   actions: {
