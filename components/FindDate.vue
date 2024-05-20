@@ -11,7 +11,7 @@ onMounted(async () => {
   try {
     const data = await $fetch(`${serverUrl}/find_match`, {
       method: "POST",
-      body: { username: store.username },
+      body: { username: localStorage.getItem('username') },
     });
     console.log(data);
     if (data == "not found" || data == "") {
@@ -27,7 +27,7 @@ onMounted(async () => {
 const retryDate = () => {
   $fetch(`${serverUrl}/retry_date`, {
     body: {
-      username: store.username,
+      username:localStorage.getItem('username'),
       match: match.value.match,
     }, method: 'POST'
   })

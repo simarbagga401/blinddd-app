@@ -25,8 +25,8 @@ const formSubmitted = () => {
     .then((res) => {
       setTimeout(() => {
         console.log('wating 2 secs')
-        navigateTo('/find-date')
-        console.log(res.data)
+        navigateTo('/')
+        console.log(res)
       }, 500)
     })
     .catch((err) => console.log(err))

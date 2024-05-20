@@ -1,16 +1,41 @@
 <script setup lang="ts">
+import { useDatesStore } from "@/stores/dates_store";
+const store = useDatesStore();
+
+const signOut = () => {
+  navigateTo('/')
+  localStorage.setItem("username", "null");
+  location.reload();
+};
 </script>
 
 <template>
   <main>
-    <NuxtLink to='/' class="logo">
-      Blinddd <i>Straightforward way to dating</i>
-    </NuxtLink>
+    <header>
+      <NuxtLink to="/" class="logo">
+        Blinddd <i>Straightforward way to dating</i>
+      </NuxtLink>
+      <p v-if="store.signedIn" class="sign-out" @click="signOut">sign out</p>
+    </header>
     <NuxtPage />
   </main>
 </template>
 
 <style scoped>
+header {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  justify-content: space-around;
+}
+
+.sign-out {
+  color: #ff2d2d;
+  text-decoration: underline;
+  align-self: flex-end;
+  justify-self: end;
+}
+
 main {
   display: flex;
   flex-direction: column;
@@ -19,15 +44,17 @@ main {
   height: 100%;
   padding: 10px;
 }
+
 .logo {
   color: rgb(33, 33, 33);
   font-weight: bold;
   font-size: 70px;
   text-decoration: none;
 }
+
 i {
-  color:rgb(30, 0, 39);
-  color:#673ab7;
+  color: rgb(30, 0, 39);
+  color: #673ab7;
   font-weight: 500;
   font-size: 20px;
 }
@@ -36,6 +63,7 @@ i {
   .logo {
     font-size: 40px;
   }
+
   i {
     font-size: 10px;
   }
