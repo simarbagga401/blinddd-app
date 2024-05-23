@@ -13,8 +13,16 @@ img {
   margin-top: 10px;
 }
 
+.signup{
+  color:#673ab7;
+  background: white;
+  border-color: #673ab7;
+  border:2px solid;
+}
+
 p.instead {
   text-decoration: underline;
+  cursor:pointer;
 }
 .danger{
   color:#ff2d2d;

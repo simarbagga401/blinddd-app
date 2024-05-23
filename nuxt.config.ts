@@ -5,5 +5,5 @@ export default defineNuxtConfig({
     "~/assets/css/main.css",
     "primevue/resources/themes/md-light-deeppurple/theme.css",
   ],
-  modules: ["nuxt-primevue", "@pinia/nuxt"],
+  modules: ["nuxt-primevue", "@pinia/nuxt",],
 });

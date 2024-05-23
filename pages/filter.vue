@@ -33,13 +33,14 @@ const formSubmitted = () => {
 };
 
 const genderOptions = ref([{ name: "Man" }, { name: "Woman" }]);
+const age_range = ref([18, 80]);
 </script>
 
 <template>
   <form id="header" @submit.prevent="formSubmitted">
     <section>
       <h1 class="heading">Age</h1>
-      <Slider :min="18" :max="80" v-model="store.age" required />
+      <Slider class="input" :min="18" :max="80" v-model="store.age" required />
       {{ store.age }}
     </section>
 
@@ -67,12 +68,8 @@ const genderOptions = ref([{ name: "Man" }, { name: "Woman" }]);
 
     <section>
       <h1 class="heading">Age Range</h1>
-      <MultiSlider
-        class="slider-purple"
-        :min="18"
-        :max="80"
-        v-model="store.age_range"
-      />
+      <Slider class="input" range v-model="store.age_range" :min="18" :max="80" />
+      <p>{{ store.age_range }}</p>
     </section>
 
     <Button type="submit">Find date</Button>
@@ -105,8 +102,11 @@ section {
 }
 
 @media screen and (max-width: 680px) {
-  header {
+  #header {
     align-items: flex-start;
+  }
+  .input {
+    width: 200px;
   }
 
   #username {

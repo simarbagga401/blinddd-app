@@ -35,7 +35,7 @@ const signUp = () => {
         <InputText  v-model="store.username" required />
         <p>Password</p>
         <InputText type="password"  v-model="store.password" required />
-        <Button class="btn" type="submit">sign up</Button>
+        <Button class="signup btn" type="submit">sign up</Button>
         <p class="instead" @click="$emit('changeSignUpState',false)">
             Sign in instead
         </p>

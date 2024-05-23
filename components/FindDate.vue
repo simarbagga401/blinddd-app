@@ -6,12 +6,13 @@ import { useDatesStore } from "@/stores/dates_store";
 const store = useDatesStore();
 
 let match = ref("Date not found");
+let chatOpen = ref(false)
 
 onMounted(async () => {
   try {
     const data = await $fetch(`${serverUrl}/find_match`, {
       method: "POST",
-      body: { username: localStorage.getItem('username') },
+      body: { username: localStorage.getItem("username") },
     });
     console.log(data);
     if (data == "not found" || data == "") {
@@ -27,9 +28,10 @@ onMounted(async () => {
 const retryDate = () => {
   $fetch(`${serverUrl}/retry_date`, {
     body: {
-      username:localStorage.getItem('username'),
+      username: localStorage.getItem("username"),
       match: match.value.match,
-    }, method: 'POST'
+    },
+    method: "POST",
   })
     .then((res) => console.log(res))
     .catch((e) => console.log(e));
@@ -43,7 +45,7 @@ const retryDate = () => {
     <h1>Date will be Found Soon!</h1>
     <p>Come back again after a while...</p>
   </div>
-  <div v-else>
+  <div v-else-if="!chatOpen">
     <h1>Date Found</h1>
     <img :src="match.userImageLink" alt="userImage" />
     <p><span>Name:</span> {{ match.username }}</p>
@@ -51,12 +53,22 @@ const retryDate = () => {
     <p><span>Age:</span> {{ match.age }}</p>
     <p><span>Date's Location:</span> {{ match.date_location }}</p>
   </div>
-  <div v-if="match != 'Date not found'">
+  <div class="button-div" v-if="match != 'Date not found'">
     <Button class="danger" @click="retryDate">Cancel and Retry</Button>
+    <Button @click="chatOpen = !chatOpen">Chat</Button>
   </div>
+  <Chat v-if="chatOpen"/>
 </template>
 
 <style scoped>
+.button-div {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  width: clamp(340px, 40%, 500px);
+  margin-top: 10px;
+}
+
 .danger {
   background: #ff2d2d;
 }

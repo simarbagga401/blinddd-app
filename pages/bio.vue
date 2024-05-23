@@ -1,44 +1,55 @@
 <script setup>
-import InputText from 'primevue/inputtext'
-import Button from 'primevue/button'
+import InputText from "primevue/inputtext";
+import Button from "primevue/button";
 
-import { serverUrl } from '@/assets/serverUrl'
+import { serverUrl } from "@/assets/serverUrl";
 import { useDatesStore } from "@/stores/dates_store";
 const store = useDatesStore();
 
-const formData = new FormData()
+const formData = new FormData();
 
 const handleImage = (e) => {
-  if (e.target.files[0].size > 4194304) {
-    alert('image size is too big')
+  if (e.target.files[0].size > 5242880) {
+    alert("image size is too big");
+    let form = document.getElementById("header");
+    form.reset();
+    return;
   } else {
-    let reader = new FileReader()
-    let selectedFile = document.getElementById('userImage')
+    let selectedFile = document.querySelector("#userImage");
+    let reader = new FileReader();
 
     reader.onload = function (event) {
-      selectedFile.src = event.target.result
-    }
-    reader.readAsDataURL(e.target.files[0])
+      selectedFile.src = event.target.result;
+    };
+    reader.readAsDataURL(e.target.files[0]);
 
-    formData.append('file', e.target.files[0])
-    formData.append('username', localStorage.getItem('username'))
+    formData.append("file", e.target.files[0]);
+    formData.append("username", localStorage.getItem("username"));
   }
-}
+};
 
 const formSubmitted = () => {
-  $fetch(`${serverUrl}/upload_image`, { method: 'POST', body: formData }, {
-    headers: { 'Content-Type': 'multipart/form-data' }
-  })
+  $fetch(
+    `${serverUrl}/upload_image`,
+    { method: "POST", body: formData },
+    {
+      headers: { "Content-Type": "multipart/form-data" },
+    }
+  )
     .then((res) => {
-      console.log(res)
+      console.log(res);
     })
-    .catch((err) => console.log(err))
-  navigateTo('/filter')
-}
+    .catch((err) => console.log(err));
+  navigateTo("/filter");
+};
 </script>
 
 <template>
-  <form id="header" @submit.prevent="formSubmitted" enctype="multipart/form-data">
+  <form
+    id="header"
+    @submit.prevent="formSubmitted"
+    enctype="multipart/form-data"
+  >
     <img id="userImage" alt="" />
     <section>
       <h1 class="heading">Image</h1>
@@ -47,7 +58,7 @@ const formSubmitted = () => {
 
     <section>
       <h1 class="heading">Instagram</h1>
-      <InputText id="username" v-model="store.instagram" required />
+      <InputText id="input" v-model="store.instagram" required />
     </section>
 
     <Button type="submit">Next</Button>
@@ -82,12 +93,12 @@ section {
 }
 
 @media screen and (max-width: 680px) {
-  header {
+  #header {
     align-items: flex-start;
   }
 
-  #username {
-    width: 100px;
+  #input {
+    width: 250px;
   }
 }
 </style>

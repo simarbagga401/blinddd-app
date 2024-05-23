@@ -18,7 +18,7 @@ const signOut = async() => {
   <main>
     <header>
       <NuxtLink to="/" class="logo">
-        Blinddd <i>Straightforward way to dating</i>
+        Blinddd
       </NuxtLink>
       <p v-if="user !== 'null' && user !== null" class="sign-out" @click="signOut">
         sign out
