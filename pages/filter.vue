@@ -3,33 +3,54 @@ import Slider from "primevue/slider";
 import Dropdown from "primevue/dropdown";
 import Button from "primevue/button";
 
-import MultiSlider from "@vueform/slider";
 import { serverUrl } from "@/assets/serverUrl";
 import { useDatesStore } from "@/stores/dates_store";
 const store = useDatesStore();
 
 const formSubmitted = () => {
   console.log("finding date");
-  $fetch(`${serverUrl}/find_date`, {
-    method: "POST",
-    body: {
-      username: localStorage.getItem("username"),
-      instagram: store.instagram,
-      age: store.age,
-      gender: store.gender.name,
-      dates_gender: store.dates_gender.name,
-      age_range: store.age_range,
-      match: store.match,
-    },
-  })
-    .then((res) => {
-      setTimeout(() => {
-        console.log("wating 2 secs");
-        navigateTo("/");
-        console.log(res);
-      }, 500);
+  if (store.instagram == "") {
+    $fetch(`${serverUrl}/find_date`, {
+      method: "POST",
+      body: {
+        username: localStorage.getItem("username"),
+        age: store.age,
+        gender: store.gender.name,
+        dates_gender: store.dates_gender.name,
+        age_range: store.age_range,
+        match: store.match,
+      },
     })
-    .catch((err) => console.log(err));
+      .then((res) => {
+        setTimeout(() => {
+          console.log("wating 2 secs");
+          navigateTo("/");
+          console.log(res);
+        }, 500);
+      })
+      .catch((err) => console.log(err));
+  } else {
+    $fetch(`${serverUrl}/find_date`, {
+      method: "POST",
+      body: {
+        username: localStorage.getItem("username"),
+        age: store.age,
+        gender: store.gender.name,
+        instagram:store.instagram,
+        dates_gender: store.dates_gender.name,
+        age_range: store.age_range,
+        match: store.match,
+      },
+    })
+      .then((res) => {
+        setTimeout(() => {
+          console.log("wating 2 secs");
+          navigateTo("/");
+          console.log(res);
+        }, 500);
+      })
+      .catch((err) => console.log(err));
+  }
 };
 
 const genderOptions = ref([{ name: "Man" }, { name: "Woman" }]);
@@ -68,7 +89,13 @@ const age_range = ref([18, 80]);
 
     <section>
       <h1 class="heading">Age Range</h1>
-      <Slider class="input" range v-model="store.age_range" :min="18" :max="80" />
+      <Slider
+        class="input"
+        range
+        v-model="store.age_range"
+        :min="18"
+        :max="80"
+      />
       <p>{{ store.age_range }}</p>
     </section>
 

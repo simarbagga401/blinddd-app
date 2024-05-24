@@ -35,7 +35,7 @@ const retryDate = () => {
   })
     .then((res) => console.log(res))
     .catch((e) => console.log(e));
-  navigateTo("/bio");
+  navigateTo("/filter");
 };
 </script>
 
