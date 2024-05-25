@@ -4,7 +4,7 @@ const store = useDatesStore();
 let signUpState = ref(false);
 let user = ref('null');
 onMounted(() => {
-  user.value = localStorage.getItem("username");
+  user.value = localStorage.getItem("email");
 });
 </script>
 

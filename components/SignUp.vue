@@ -13,7 +13,7 @@ const signUp = () => {
         {
             method: "POST", body: {
 
-                username: store.username,
+                email: store.email,
                 password: store.password,
             }
         }
@@ -32,7 +32,7 @@ const signUp = () => {
         <h3 class="danger">{{ signUpData }}</h3>
         <h1>Sign up</h1>
         <p>Email</p>
-        <InputText  v-model="store.username" required />
+        <InputText  v-model="store.email" required />
         <p>Password</p>
         <InputText type="password"  v-model="store.password" required />
         <Button class="signup btn" type="submit">sign up</Button>

@@ -8,12 +8,12 @@ const store = useDatesStore();
 
 let user: Ref<string | null> = ref("null");
 onMounted(() => {
-  user.value = localStorage.getItem("username");
+  user.value = localStorage.getItem("email");
 });
 
 const signOut = async () => {
   await navigateTo("/");
-  localStorage.setItem("username", "null");
+  localStorage.setItem("email", "null");
   location.reload();
 };
 

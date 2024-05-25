@@ -12,7 +12,7 @@ onMounted(async () => {
   try {
     const data = await $fetch(`${serverUrl}/find_match`, {
       method: "POST",
-      body: { username: localStorage.getItem("username") },
+      body: { email: localStorage.getItem("email") },
     });
     console.log(data);
     if (data == "not found" || data == "") {
@@ -28,7 +28,7 @@ onMounted(async () => {
 const retryDate = () => {
   $fetch(`${serverUrl}/retry_date`, {
     body: {
-      username: localStorage.getItem("username"),
+      email: localStorage.getItem("email"),
       match: match.value.match,
     },
     method: "POST",
@@ -48,7 +48,7 @@ const retryDate = () => {
   <div v-else-if="!chatOpen">
     <h1>Date Found</h1>
     <img :src="match.userImageLink" alt="userImage" />
-    <p><span>Name:</span> {{ match.username }}</p>
+    <p><span>Name:</span> {{ match.email }}</p>
     <p><span>Instagram:</span> {{ match.instagram }}</p>
     <p><span>Age:</span> {{ match.age }}</p>
     <p><span>Date's Location:</span> {{ match.date_location }}</p>

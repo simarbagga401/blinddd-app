@@ -11,17 +11,17 @@ const signIn = () => {
     $fetch(`${serverUrl}/sign_in`, {
         method: "POST",
         body: {
-            username: store.username,
+            email: store.email,
             password: store.password,
         },
     })
         .then(async (data) => {
             if (data.msg == "sign in successful") {
-                localStorage.setItem("username",store.username)
+                localStorage.setItem("email",store.email)
                 const match = await $fetch(`${serverUrl}/check_match`, {
                     method: 'POST',
                     body: {
-                        username: store.username,
+                        email: store.email,
                     }
                 });
                 if (match == "") {
@@ -45,8 +45,8 @@ const signIn = () => {
     <form @submit.prevent="signIn">
         <h3 class="danger">{{ signInData }}</h3>
         <h1>Sign in</h1>
-        <p>Username</p>
-        <InputText  v-model="store.username" required />
+        <p>Email</p>
+        <InputText  v-model="store.email" required />
         <p>Password</p>
         <InputText type="password"  v-model="store.password" required />
         <Button class="btn" type="submit">sign in</Button>

@@ -24,7 +24,7 @@ const handleImage = (e) => {
     reader.readAsDataURL(e.target.files[0]);
 
     formData.append("file", e.target.files[0]);
-    formData.append("username", localStorage.getItem("username"));
+    formData.append("email", localStorage.getItem("email"));
   }
 };
 

@@ -13,7 +13,7 @@ const formSubmitted = () => {
     $fetch(`${serverUrl}/find_date`, {
       method: "POST",
       body: {
-        username: localStorage.getItem("username"),
+        email: localStorage.getItem("email"),
         age: store.age,
         gender: store.gender.name,
         dates_gender: store.dates_gender.name,
@@ -33,7 +33,7 @@ const formSubmitted = () => {
     $fetch(`${serverUrl}/find_date`, {
       method: "POST",
       body: {
-        username: localStorage.getItem("username"),
+        email: localStorage.getItem("email"),
         age: store.age,
         gender: store.gender.name,
         instagram:store.instagram,
@@ -139,7 +139,7 @@ section {
     width: 200px;
   }
 
-  #username {
+  #email {
     width: 100px;
   }
 }

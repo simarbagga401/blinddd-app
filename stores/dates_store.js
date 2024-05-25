@@ -3,7 +3,7 @@ import { defineStore } from "pinia";
 export const useDatesStore = defineStore("dates", {
   state: () => {
     return {
-      username: "",
+      email: "",
       password: "",
       age: 18,
       gender: "Man",
