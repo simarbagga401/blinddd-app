@@ -45,9 +45,9 @@ const signIn = () => {
     <form @submit.prevent="signIn">
         <h3 class="danger">{{ signInData }}</h3>
         <h1>Sign in</h1>
-        <p>Email</p>
+        <p>Email:</p>
         <InputText type="email" v-model="store.email" required />
-        <p>Password</p>
+        <p>Password:</p>
         <InputText type="password"  v-model="store.password" required />
         <Button class="btn" type="submit">sign in</Button>
         <p class="instead" @click="$emit('changeSignUpState', true)">

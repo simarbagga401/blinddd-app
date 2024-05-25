@@ -1,6 +1,29 @@
 <script setup>
+import { State } from "country-state-city";
+let states = ref();
+
+onMounted(() => {
+  const allStates = computed(() => State.getAllStates());
+  const statesArray = allStates.value.map((state) => state.name);
+  states.value = statesArray.map((state) => ({ name: state }));
+});
+
+const filteredStates = ref();
+const search = (event) => {
+    setTimeout(() => {
+        if (!event.query.trim().length) {
+            filteredStates.value = [...states.value];
+        } else {
+            filteredStates.value = states.value.filter((state) => {
+                return state.name.toLowerCase().startsWith(event.query.toLowerCase());
+            });
+        }
+    }, 250);
+}
+
 import InputText from "primevue/inputtext";
 import Button from "primevue/button";
+import Textarea from "primevue/textarea";
 
 import { serverUrl } from "@/assets/serverUrl";
 import { useDatesStore } from "@/stores/dates_store";
@@ -52,13 +75,28 @@ const formSubmitted = () => {
   >
     <img id="userImage" alt="" />
     <section>
-      <h1 class="heading">Image</h1>
+      <h1 class="heading">Image:</h1>
       <input type="file" accept="image/*" @change="handleImage" required />
     </section>
 
     <section>
-      <h1 class="heading">Instagram</h1>
+      <h1 class="heading">Instagram:</h1>
       <InputText id="input" v-model="store.instagram" required />
+    </section>
+
+    <section>
+      <h1 class="heading">Bio:</h1>
+      <Textarea v-model="store.bio" rows="2" cols="19" />
+    </section>
+
+    <section>
+      <h1 class="heading">State:</h1>
+      <AutoComplete
+        v-model="store.state"
+        optionLabel="name"
+        :suggestions="filteredStates"
+        @complete="search"
+      />
     </section>
 
     <Button type="submit">Next</Button>

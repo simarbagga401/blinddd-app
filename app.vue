@@ -25,16 +25,16 @@ const items = ref([
       {
         label: "Settings",
         icon: "pi pi-cog",
-        command:() => {
-          navigateTo('/settings')
-        }
+        command: () => {
+          navigateTo("/settings");
+        },
       },
       {
         label: "Sign out",
         icon: "pi pi-sign-out",
-        command:() => {
+        command: () => {
           signOut();
-        }
+        },
       },
     ],
   },
@@ -70,19 +70,18 @@ header {
   display: flex;
   width: 100%;
   height: 100%;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
 }
 
-#hamburger-icon{
+#hamburger-icon {
   width: 30px;
   height: 30px;
-  color:#673ab7;
+  color: #673ab7;
   background-color: white;
-  border:#673ab7 2px solid ;
-  justify-self:flex-end;
+  border: #673ab7 2px solid;
+  justify-self: flex-end;
 }
-
 
 .sign-out {
   color: #ff2d2d;
@@ -120,6 +119,9 @@ i {
     font-size: 40px;
   }
 
+  header {
+    justify-content: space-between;
+  }
   i {
     font-size: 10px;
   }

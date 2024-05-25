@@ -51,7 +51,8 @@ const retryDate = () => {
     <p><span>Name:</span> {{ match.email }}</p>
     <p><span>Instagram:</span> {{ match.instagram }}</p>
     <p><span>Age:</span> {{ match.age }}</p>
-    <p><span>Date's Location:</span> {{ match.date_location }}</p>
+    <p><span>State:</span> {{ match.state }}</p>
+    <p><span>Bio</span> {{ match.bio }}</p>
   </div>
   <div class="button-div" v-if="match != 'Date not found'">
     <Button class="danger" @click="retryDate">Cancel and Retry</Button>

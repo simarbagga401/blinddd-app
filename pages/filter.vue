@@ -15,6 +15,8 @@ const formSubmitted = () => {
       body: {
         email: localStorage.getItem("email"),
         age: store.age,
+        bio:store.bio,
+        state:store.state.name,
         gender: store.gender.name,
         dates_gender: store.dates_gender.name,
         age_range: store.age_range,
@@ -37,6 +39,8 @@ const formSubmitted = () => {
         age: store.age,
         gender: store.gender.name,
         instagram:store.instagram,
+        bio:store.bio,
+        state:store.state.name,
         dates_gender: store.dates_gender.name,
         age_range: store.age_range,
         match: store.match,
@@ -66,31 +70,31 @@ const age_range = ref([18, 80]);
     </section>
 
     <section>
-      <h1 class="heading">Gender</h1>
+      <h1 class="heading">Gender:</h1>
       <Dropdown
         v-model="store.gender"
         :options="genderOptions"
         optionLabel="name"
         placeholder="Your Gender"
         class="w-full md:w-14rem"
-        [required]="true"
+        required
       />
     </section>
 
     <section>
-      <h1 class="heading">Date's Gender</h1>
+      <h1 class="heading">Date's Gender:</h1>
       <Dropdown
         v-model="store.dates_gender"
         :options="genderOptions"
         optionLabel="name"
         placeholder="Date's Gender"
         class="w-full md:w-14rem"
-        [required]="true"
+        required
       />
     </section>
 
     <section>
-      <h1 class="heading">Age Range</h1>
+      <h1 class="heading">Age Range:</h1>
       <Slider
         class="input"
         range

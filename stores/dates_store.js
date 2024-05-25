@@ -6,11 +6,13 @@ export const useDatesStore = defineStore("dates", {
       email: "",
       password: "",
       age: 18,
-      gender: "",
-      dates_gender: "",
+      gender: {name:'Man'},
+      dates_gender: {name:'Woman'},
       age_range: [18, 25],
       match: null,
       instagram: "",
+      bio:"",
+      state:""
     };
   },
   actions: {
