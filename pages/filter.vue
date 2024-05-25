@@ -73,6 +73,7 @@ const age_range = ref([18, 80]);
         optionLabel="name"
         placeholder="Your Gender"
         class="w-full md:w-14rem"
+        [required]="true"
       />
     </section>
 
@@ -84,6 +85,7 @@ const age_range = ref([18, 80]);
         optionLabel="name"
         placeholder="Date's Gender"
         class="w-full md:w-14rem"
+        [required]="true"
       />
     </section>
 
@@ -95,6 +97,7 @@ const age_range = ref([18, 80]);
         v-model="store.age_range"
         :min="18"
         :max="80"
+        required
       />
       <p>{{ store.age_range }}</p>
     </section>

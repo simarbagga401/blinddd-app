@@ -1,28 +1,65 @@
 <script setup lang="ts">
+import Menu from "primevue/menu";
+import Button from "primevue/button";
+import { ref } from "vue";
+
 import { useDatesStore } from "@/stores/dates_store";
 const store = useDatesStore();
 
-let user:Ref<string | null> = ref('null');
+let user: Ref<string | null> = ref("null");
 onMounted(() => {
   user.value = localStorage.getItem("username");
 });
 
-const signOut = async() => {
+const signOut = async () => {
   await navigateTo("/");
   localStorage.setItem("username", "null");
   location.reload();
+};
+
+const menu = ref();
+const items = ref([
+  {
+    label: "Profile",
+    items: [
+      {
+        label: "Settings",
+        icon: "pi pi-cog",
+        command:() => {
+          navigateTo('/settings')
+        }
+      },
+      {
+        label: "Sign out",
+        icon: "pi pi-sign-out",
+        command:() => {
+          signOut();
+        }
+      },
+    ],
+  },
+]);
+
+const toggle = (event: any) => {
+  menu.value.toggle(event);
 };
 </script>
 
 <template>
   <main>
     <header>
-      <NuxtLink to="/" class="logo">
-        Blinddd
-      </NuxtLink>
-      <p v-if="user !== 'null' && user !== null" class="sign-out" @click="signOut">
-        sign out
-      </p>
+      <NuxtLink to="/" class="logo"> Blinddd </NuxtLink>
+
+      <Button
+        id="hamburger-icon"
+        type="button"
+        icon=" pi pi-bars"
+        @click="toggle"
+        aria-haspopup="true"
+        aria-controls="overlay_menu"
+        v-if="user !== 'null' && user !== null"
+      />
+      <Menu ref="menu" id="overlay_menu" :model="items" :popup="true" />
     </header>
     <NuxtPage />
   </main>
@@ -33,8 +70,19 @@ header {
   display: flex;
   width: 100%;
   height: 100%;
-  justify-content: space-around;
+  justify-content: space-between;
+  align-items: center;
 }
+
+#hamburger-icon{
+  width: 30px;
+  height: 30px;
+  color:#673ab7;
+  background-color: white;
+  border:#673ab7 2px solid ;
+  justify-self:flex-end;
+}
+
 
 .sign-out {
   color: #ff2d2d;
@@ -50,7 +98,7 @@ main {
   align-items: center;
   width: 100%;
   height: 100%;
-  padding: 10px;
+  padding: 20px;
 }
 
 .logo {

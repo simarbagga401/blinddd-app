@@ -31,7 +31,7 @@ const signUp = () => {
     <form @submit.prevent="signUp">
         <h3 class="danger">{{ signUpData }}</h3>
         <h1>Sign up</h1>
-        <p>Username</p>
+        <p>Email</p>
         <InputText  v-model="store.username" required />
         <p>Password</p>
         <InputText type="password"  v-model="store.password" required />
