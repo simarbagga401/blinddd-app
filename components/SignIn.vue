@@ -46,7 +46,7 @@ const signIn = () => {
         <h3 class="danger">{{ signInData }}</h3>
         <h1>Sign in</h1>
         <p>Email</p>
-        <InputText  v-model="store.email" required />
+        <InputText type="email" v-model="store.email" required />
         <p>Password</p>
         <InputText type="password"  v-model="store.password" required />
         <Button class="btn" type="submit">sign in</Button>
