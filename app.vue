@@ -23,10 +23,14 @@ const items = ref([
     label: "Profile",
     items: [
       {
-        label: "Settings",
+        label: () => {
+          return useRoute().name == "settings" ? "Date" : "Settings";
+        },
         icon: "pi pi-cog",
         command: () => {
-          navigateTo("/settings");
+          useRoute().name == "settings"
+            ? navigateTo("/")
+            : navigateTo("/settings");
         },
       },
       {
@@ -48,7 +52,7 @@ const toggle = (event: any) => {
 <template>
   <main>
     <header>
-      <NuxtLink to="/" class="logo"> Blinddd </NuxtLink>
+      <NuxtLink id="logo"> Blinddd </NuxtLink>
 
       <Button
         id="hamburger-icon"
@@ -61,7 +65,7 @@ const toggle = (event: any) => {
       />
       <Menu ref="menu" id="overlay_menu" :model="items" :popup="true" />
     </header>
-    <NuxtPage />
+    <NuxtPage @disableLogoNav="console.log('dissabled logo naviagation')" />
   </main>
 </template>
 
@@ -100,11 +104,12 @@ main {
   padding: 20px;
 }
 
-.logo {
+#logo {
   color: rgb(33, 33, 33);
   font-weight: bold;
   font-size: 70px;
   text-decoration: none;
+  user-select: none;
 }
 
 i {
@@ -115,7 +120,7 @@ i {
 }
 
 @media screen and (max-width: 680px) {
-  .logo {
+  #logo {
     font-size: 40px;
   }
 

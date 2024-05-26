@@ -7,6 +7,7 @@ import { serverUrl } from "@/assets/serverUrl";
 import { useDatesStore } from "@/stores/dates_store";
 const store = useDatesStore();
 
+
 const formSubmitted = () => {
   console.log("finding date");
   if (store.instagram == "") {
@@ -109,6 +110,7 @@ const age_range = ref([18, 80]);
     <Button type="submit">Find date</Button>
   </form>
 </template>
+
 
 <style scoped>
 #header {
