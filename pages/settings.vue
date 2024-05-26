@@ -62,7 +62,7 @@ const handleImage = (e) => {
 const updateProfile = () => {
   formData.append("password", payload.value.password);
   formData.append("instagram", payload.value.instagram);
-  formData.append("state", payload.value.state.name);
+  formData.append("state", payload.value.state);
   formData.append("bio", payload.value.bio);
 
   if (formData.get("file") == null) {

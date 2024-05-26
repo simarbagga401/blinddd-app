@@ -103,7 +103,6 @@ const formSubmitted = () => {
   </form>
 </template>
 
-<style src="@vueform/slider/themes/default.css"></style>
 <style scoped>
 #header {
   padding: 10px;
