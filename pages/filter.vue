@@ -110,7 +110,6 @@ const age_range = ref([18, 80]);
   </form>
 </template>
 
-<style src="@vueform/slider/themes/default.css"></style>
 <style scoped>
 #header {
   padding: 10px;

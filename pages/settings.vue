@@ -6,37 +6,20 @@ import { useDatesStore } from "@/stores/dates_store";
 import { serverUrl } from "~/assets/serverUrl";
 const store = useDatesStore();
 
-import { State } from "country-state-city";
-let states = ref();
-
-const filteredStates = ref();
-const search = (event) => {
-  setTimeout(() => {
-    if (!event.query.trim().length) {
-      filteredStates.value = [...states.value];
-    } else {
-      filteredStates.value = states.value.filter((state) => {
-        return state.name.toLowerCase().startsWith(event.query.toLowerCase());
-      });
-    }
-  }, 250);
-};
-
 let payload = ref("");
 onMounted(() => {
-  const allStates = computed(() => State.getAllStates());
-  const statesArray = allStates.value.map((state) => state.name);
-  states.value = statesArray.map((state) => ({ name: state }));
-
   $fetch(`${serverUrl}/profile_settings`, {
     method: "POST",
     body: {
       email: localStorage.getItem("email"),
     },
   })
-    .then((res) => (payload.value = res))
+    .then((res) => {
+      payload.value = res;
+    })
     .catch((e) => console.log(e));
 });
+
 
 const formData = new FormData();
 const handleImage = (e) => {
@@ -62,7 +45,6 @@ const handleImage = (e) => {
 const updateProfile = () => {
   formData.append("password", payload.value.password);
   formData.append("instagram", payload.value.instagram);
-  formData.append("state", payload.value.state);
   formData.append("bio", payload.value.bio);
 
   if (formData.get("file") == null) {
@@ -73,7 +55,6 @@ const updateProfile = () => {
         password: payload.value.password,
         instagram: payload.value.instagram,
         bio: payload.value.bio,
-        state: payload.value.state.name,
       },
     })
       .then((res) => {
@@ -129,16 +110,6 @@ const deleteProfile = () => {
     <section>
       <p>Instagram:</p>
       <InputText v-model="payload.instagram" required />
-    </section>
-
-    <section>
-      <p>State:</p>
-      <AutoComplete
-        v-model="payload.state"
-        optionLabel="name"
-        :suggestions="filteredStates"
-        @complete="search"
-      />
     </section>
 
     <section>
