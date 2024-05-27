@@ -9,7 +9,6 @@ img {
   width: clamp(200px, 20%, 400px);
 }
 .btn {
-  margin-left: 10px;
   margin-top: 10px;
 }
 
@@ -26,4 +25,14 @@ p.instead {
 }
 .danger{
   color:#ff2d2d;
+}
+
+.input{
+  margin-right:10px;
+}
+
+@media screen and (max-width: 680px) {
+  .input{
+    width:200px;
+  }
 }

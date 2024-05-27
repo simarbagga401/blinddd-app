@@ -104,17 +104,17 @@ const deleteProfile = () => {
 
     <section>
       <p>Password:</p>
-      <InputText v-model="payload.password" required />
+      <InputText class="input" v-model="payload.password" required />
     </section>
 
     <section>
       <p>Instagram:</p>
-      <InputText v-model="payload.instagram" required />
+      <InputText class="input" v-model="payload.instagram" required />
     </section>
 
     <section>
       <p>Bio:</p>
-      <Textarea v-model="payload.bio" rows="2" cols="19" />
+      <Textarea class="input" v-model="payload.bio" rows="2" cols="19" />
     </section>
     <Button type="submit" class="btn">Update</Button>
     <Button class="btn danger" @click="deleteProfile">Delete Profile</Button>
@@ -136,7 +136,7 @@ const deleteProfile = () => {
   background: #ff2d2d;
 }
 .btn {
-  margin: 10px;
+  margin-top: 10px;
 }
 
 .heading {
@@ -149,9 +149,18 @@ img {
   border-radius: 7px;
 }
 
+
+.input{
+  margin-right:10px;
+}
+
 @media screen and (max-width: 680px) {
   #header {
     align-items: flex-start;
+  }
+
+  .input {
+    width: 200px;
   }
 }
 </style>

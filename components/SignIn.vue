@@ -46,9 +46,10 @@ const signIn = () => {
         <h3 class="danger">{{ signInData }}</h3>
         <h1>Sign in</h1>
         <p>Email:</p>
-        <InputText type="email" v-model="store.email" required />
+        <InputText class="input" type="email" v-model="store.email" required />
         <p>Password:</p>
-        <InputText type="password"  v-model="store.password" required />
+        <InputText class="input" type="password"  v-model="store.password" required />
+        <br>
         <Button class="btn" type="submit">sign in</Button>
         <p class="instead" @click="$emit('changeSignUpState', true)">
             Sign up instead

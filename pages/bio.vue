@@ -10,16 +10,16 @@ onMounted(() => {
 
 const filteredStates = ref();
 const search = (event) => {
-    setTimeout(() => {
-        if (!event.query.trim().length) {
-            filteredStates.value = [...states.value];
-        } else {
-            filteredStates.value = states.value.filter((state) => {
-                return state.name.toLowerCase().startsWith(event.query.toLowerCase());
-            });
-        }
-    }, 250);
-}
+  setTimeout(() => {
+    if (!event.query.trim().length) {
+      filteredStates.value = [...states.value];
+    } else {
+      filteredStates.value = states.value.filter((state) => {
+        return state.name.toLowerCase().startsWith(event.query.toLowerCase());
+      });
+    }
+  }, 250);
+};
 
 import InputText from "primevue/inputtext";
 import Button from "primevue/button";
@@ -81,21 +81,23 @@ const formSubmitted = () => {
 
     <section>
       <h1 class="heading">Instagram:</h1>
-      <InputText id="input" v-model="store.instagram" required />
+      <InputText class="input" v-model="store.instagram" required />
     </section>
 
     <section>
       <h1 class="heading">Bio:</h1>
-      <Textarea v-model="store.bio" rows="2" cols="19" />
+      <Textarea class="input" v-model="store.bio" rows="2" cols="19" required />
     </section>
 
     <section>
       <h1 class="heading">State:</h1>
       <AutoComplete
         v-model="store.state"
+        class="input"
         optionLabel="name"
         :suggestions="filteredStates"
         @complete="search"
+        required
       />
     </section>
 
@@ -134,8 +136,8 @@ section {
     align-items: flex-start;
   }
 
-  #input {
-    width: 250px;
+  .input {
+    width: 200px;
   }
 }
 </style>
