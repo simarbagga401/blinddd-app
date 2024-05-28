@@ -54,11 +54,14 @@ const retryDate = () => {
     <p><span>State:</span> {{ match.state }}</p>
     <p><span>Bio</span> {{ match.bio }}</p>
   </div>
+  <!-- <Chat v-if="chatOpen"/> -->
+  <div v-if="chatOpen">
+    <h1>Chat feature is not available yet!</h1>
+  </div>
   <div class="button-div" v-if="match != 'Date not found'">
     <Button class="danger" @click="retryDate">Cancel and Retry</Button>
     <Button @click="chatOpen = !chatOpen">Chat</Button>
   </div>
-  <Chat v-if="chatOpen"/>
 </template>
 
 <style scoped>
