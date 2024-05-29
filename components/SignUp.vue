@@ -25,6 +25,19 @@ const signUp = () => {
         .catch((err) => console.log(err));
 };
 
+
+useHead({
+  head: {
+    title: "Sign Up",
+    meta: [
+      {
+        hid: "description",
+        name: "description",
+        content: "Sign Up for Blinddd",
+      },
+    ],
+  },
+});
 </script>
 
 <template>

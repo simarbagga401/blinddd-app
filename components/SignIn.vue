@@ -8,55 +8,71 @@ const store = useDatesStore();
 let signInData = ref();
 
 const signIn = () => {
-    $fetch(`${serverUrl}/sign_in`, {
-        method: "POST",
-        body: {
+  $fetch(`${serverUrl}/sign_in`, {
+    method: "POST",
+    body: {
+      email: store.email,
+      password: store.password,
+    },
+  })
+    .then(async (data) => {
+      if (data.msg == "sign in successful") {
+        localStorage.setItem("email", store.email);
+        const match = await $fetch(`${serverUrl}/check_match`, {
+          method: "POST",
+          body: {
             email: store.email,
-            password: store.password,
-        },
+          },
+        });
+        if (match == "") {
+          await navigateTo("/bio");
+          location.reload();
+        } else {
+          await navigateTo("/");
+          location.reload();
+        }
+        signInData.value = data.msg;
+      } else {
+        signInData.value = data.msg;
+      }
     })
-        .then(async (data) => {
-            if (data.msg == "sign in successful") {
-                localStorage.setItem("email",store.email)
-                const match = await $fetch(`${serverUrl}/check_match`, {
-                    method: 'POST',
-                    body: {
-                        email: store.email,
-                    }
-                });
-                if (match == "") {
-                   await navigateTo('/bio')
-                   location.reload()
-                } else {
-                    await  navigateTo('/')
-                    location.reload()
-                }
-                signInData.value = data.msg;
-            } else {
-                signInData.value = data.msg;
-            }
-        })
-        .catch((err) => console.log(err));
+    .catch((err) => console.log(err));
 };
 
+useHead({
+  head: {
+    title: "Sign In",
+    meta: [
+      {
+        hid: "description",
+        name: "description",
+        content: "Sign In to Blinddd",
+      },
+    ],
+  },
+});
 </script>
 
 <template>
-    <form @submit.prevent="signIn">
-        <h3 class="danger">{{ signInData }}</h3>
-        <h1>Sign in</h1>
-        <p>Email:</p>
-        <InputText class="input" type="email" v-model="store.email" required />
-        <p>Password:</p>
-        <InputText class="input" type="password"  v-model="store.password" required />
-        <br>
-        <Button class="btn" type="submit">sign in</Button>
-        <p class="instead" @click="$emit('changeSignUpState', true)">
-            Sign up instead
-        </p>
-    </form>
+  <form @submit.prevent="signIn">
+    <h3 class="danger">{{ signInData }}</h3>
+    <h1>Sign in</h1>
+    <p>Email:</p>
+    <InputText class="input" type="email" v-model="store.email" required />
+    <p>Password:</p>
+    <InputText
+      class="input"
+      type="password"
+      v-model="store.password"
+      required
+    />
+    <br />
+    <Button class="btn" type="submit">sign in</Button>
+    <p class="instead" @click="$emit('changeSignUpState', true)">
+      Sign up instead
+    </p>
+  </form>
 </template>
-
 
 <style scoped>
 @import url("~/assets/css/index.css");
