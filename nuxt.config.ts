@@ -11,6 +11,7 @@ export default defineNuxtConfig({
     "nuxt-vuefire",
     "@nuxtjs/sitemap",
     "nuxt-gtag",
+    "@vite-pwa/nuxt"
   ],
   vuefire: {
     config: {
@@ -41,5 +42,28 @@ export default defineNuxtConfig({
   },
   gtag: {
     id: "8203616111",
+  },
+  pwa: {
+    manifest: {
+      name: "Blinddd",
+      short_name: "Blinddd",
+      description:
+        "Blindd is Dating App to find dates quickly without any hassle",
+      theme_color: "#000000",
+      icons:[
+        {
+          src:'/icon.png',
+          sizes:'144x144',
+          type:'image/png'
+        }
+      ]
+    },
+    workbox:{
+      navigateFallback:'/'
+    },
+    devOptions:{
+      enabled:true,
+      type:'module'
+    }
   },
 });

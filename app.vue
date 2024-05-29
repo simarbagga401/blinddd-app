@@ -51,6 +51,7 @@ const toggle = (event: any) => {
 
 <template>
   <main>
+    <VitePwaManifest />
     <header>
       <NuxtLink id="logo"> Blinddd </NuxtLink>
 
