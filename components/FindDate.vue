@@ -19,6 +19,7 @@ onMounted(async () => {
       match.value = "Date not found";
     } else {
       match.value = data;
+      localStorage.setItem('match',data.email)
     }
   } catch (error) {
     console.log(error);
@@ -48,16 +49,16 @@ const retryDate = () => {
   <div v-else-if="!chatOpen">
     <h1>Date Found</h1>
     <img :src="match.userImageLink" alt="userImage" />
-    <p><span>Name:</span> {{ match.email }}</p>
+    <p><span>Email:</span> {{ match.email }}</p>
     <p><span>Instagram:</span> {{ match.instagram }}</p>
     <p><span>Age:</span> {{ match.age }}</p>
     <p><span>State:</span> {{ match.state }}</p>
     <p><span>Bio</span> {{ match.bio }}</p>
   </div>
-  <!-- <Chat v-if="chatOpen"/> -->
-  <div v-if="chatOpen">
+  <Chat v-if="chatOpen"/>
+  <!-- <div v-if="chatOpen">
     <h1>Chat feature is not available yet!</h1>
-  </div>
+  </div> -->
   <div class="button-div" v-if="match != 'Date not found'">
     <Button class="danger" @click="retryDate">Cancel and Retry</Button>
     <Button @click="chatOpen = !chatOpen">Chat</Button>

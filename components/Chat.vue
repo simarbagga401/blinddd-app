@@ -1,24 +1,33 @@
 <script setup>
 import InputText from "primevue/inputtext";
 import Button from "primevue/button";
-import { serverUrl } from "~/assets/serverUrl";
-import { useDatesStore } from "@/stores/dates_store";
 import { v4 as uuidv4 } from "uuid";
-const store = useDatesStore();
-
 import { db } from "~/firebase";
-import { collection, doc, orderBy, setDoc } from "firebase/firestore";
+import { collection, doc, orderBy, setDoc, query } from "firebase/firestore";
+import { sortStrings } from "~/utils/sortStrings";
 
-let chats = useCollection(collection(db, "sam-priya"));
+
+const collectionName = sortStrings(
+  localStorage.getItem("email"),
+  localStorage.getItem("match")
+);
+
+let chats = await useCollection(
+  query(collection(db, collectionName), orderBy("timestamp"))
+);
+
 let msg = ref(null);
+let email = localStorage.getItem("email");
 
 const sendMsg = async () => {
   console.log(msg.value);
-  await setDoc(doc(db, "sam-priya", uuidv4()), {
+  await setDoc(doc(db, collectionName, uuidv4()), {
     by: localStorage.getItem("email"),
     msg: msg.value,
     timestamp: Date.now(),
   });
+  document.getElementById("dummy").scrollIntoView();
+  document.getElementById('input').value = ''
 };
 </script>
 
@@ -26,14 +35,46 @@ const sendMsg = async () => {
   <h1>chat</h1>
   <div>
     <div class="chats">
-      <template v-for="chat in chats">
-        <i>{{ chat.by }}</i>
+      <div :class="{ me: chat.by == email }" class="chat" v-for="chat in chats">
+        <i>{{ chat.by }} :</i>
         <p>{{ chat.msg }}</p>
-      </template>
+      </div>
+      <div id="dummy"></div>
     </div>
-    <InputText v-model="msg" />
-    <Button @click="sendMsg">send</Button>
+    <InputText id="input" v-model="msg" />
+    <Button @click="sendMsg" id="sendMsg">send</Button>
   </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+#input{
+  margin-top:10px;
+}
+#sendMsg{
+  margin-top:10px;
+}
+
+i {
+  font-size: 15px;
+  color:#673ab7;
+}
+.chat {
+  /* background: orange; */
+  display: flex;
+  flex-direction: column;
+  margin: 10px;
+  padding: 5px;
+}
+.me {
+  align-items: flex-end;
+}
+.chats {
+  width: 100%;
+  height: 500px;
+  overflow: scroll;
+  /* background: yellow; */
+  border: 2px solid;
+  border-radius: 5px;
+  padding: 10px;
+}
+</style>
