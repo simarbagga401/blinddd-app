@@ -15,6 +15,7 @@
     "country-state-city": "^3.2.1",
     "firebase": "^10.12.1",
     "nuxt": "^3.11.2",
+    "nuxt-gtag": "^2.0.6",
     "nuxt-vuefire": "^1.0.2",
     "pinia": "^2.1.7",
     "primeicons": "^7.0.0",
