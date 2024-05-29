@@ -12,7 +12,7 @@ onMounted(() => {
     method: "POST",
     body: {
       email: localStorage.getItem("email"),
-    },
+    }
   })
     .then((res) => {
       payload.value = res;

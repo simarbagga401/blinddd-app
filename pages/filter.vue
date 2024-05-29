@@ -51,6 +51,7 @@ const formSubmitted = () => {
         setTimeout(() => {
           console.log("wating 2 secs");
           navigateTo("/");
+          location.reload()
           console.log(res);
         }, 500);
       })

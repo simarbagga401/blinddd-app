@@ -26,7 +26,6 @@ const signIn = () => {
         });
         if (match == "") {
           await navigateTo("/bio");
-          location.reload();
         } else {
           await navigateTo("/");
           location.reload();
