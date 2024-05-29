@@ -14,7 +14,6 @@ onMounted(async () => {
       method: "POST",
       body: { email: localStorage.getItem("email") },
     });
-    console.log(data);
     if (data == "not found" || data == "") {
       match.value = "Date not found";
     } else {

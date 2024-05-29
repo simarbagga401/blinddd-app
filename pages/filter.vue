@@ -7,7 +7,6 @@ import { serverUrl } from "@/assets/serverUrl";
 import { useDatesStore } from "@/stores/dates_store";
 const store = useDatesStore();
 
-
 const formSubmitted = () => {
   console.log("finding date");
   if (store.instagram == "") {
@@ -16,8 +15,8 @@ const formSubmitted = () => {
       body: {
         email: localStorage.getItem("email"),
         age: store.age,
-        bio:store.bio,
-        state:store.state.name,
+        bio: store.bio,
+        state: store.state.name,
         gender: store.gender.name,
         dates_gender: store.dates_gender.name,
         age_range: store.age_range,
@@ -25,10 +24,11 @@ const formSubmitted = () => {
       },
     })
       .then((res) => {
-        setTimeout(() => {
+        setTimeout(async () => {
           console.log("wating 2 secs");
-          navigateTo("/");
           console.log(res);
+          await navigateTo("/");
+          location.reload();
         }, 500);
       })
       .catch((err) => console.log(err));
@@ -39,20 +39,20 @@ const formSubmitted = () => {
         email: localStorage.getItem("email"),
         age: store.age,
         gender: store.gender.name,
-        instagram:store.instagram,
-        bio:store.bio,
-        state:store.state.name,
+        instagram: store.instagram,
+        bio: store.bio,
+        state: store.state.name,
         dates_gender: store.dates_gender.name,
         age_range: store.age_range,
         match: store.match,
       },
     })
       .then((res) => {
-        setTimeout(() => {
+        setTimeout(async () => {
           console.log("wating 2 secs");
-          navigateTo("/");
-          location.reload()
+          await navigateTo("/");
           console.log(res);
+          location.reload();
         }, 500);
       })
       .catch((err) => console.log(err));
@@ -111,7 +111,6 @@ const age_range = ref([18, 80]);
     <Button type="submit">Find date</Button>
   </form>
 </template>
-
 
 <style scoped>
 #header {
