@@ -10,24 +10,7 @@ export default defineNuxtConfig({
     "@pinia/nuxt",
     "nuxt-vuefire",
     "@nuxtjs/sitemap",
-    "@nuxtjs/google-analytics",
   ],
-  googleAnalytics: {
-    id: "8203616111",
-  },
-  head: {
-    title: "Straightforward Way to Dating",
-    meta: [
-      { charset: "utf-8" },
-      { name: "viewport", content: "width=device-width, initial-scale=1" },
-      {
-        hid: "description",
-        name: "description",
-        content: "Blindd is Dating App to find dates quickly without any hassle",
-      },
-    ],
-    link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.ico" }],
-  },
   vuefire: {
     config: {
       apiKey: "AIzaSyC0o27iPv_Q8uiuKbIxUp8aAoivZniz300",
@@ -37,6 +20,22 @@ export default defineNuxtConfig({
       messagingSenderId: "471241017972",
       appId: "1:471241017972:web:d5117e089830348709df21",
       measurementId: "G-B6SDRRJ84K",
+    },
+  },
+  app: {
+    head: {
+      title: "Straightforward Way to Dating",
+      meta: [
+        { charset: "utf-8" },
+        { name: "viewport", content: "width=device-width, initial-scale=1" },
+        {
+          hid: "description",
+          name: "description",
+          content:
+            "Blindd is Dating App to find dates quickly without any hassle",
+        },
+      ],
+      link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.ico" }],
     },
   },
 });
