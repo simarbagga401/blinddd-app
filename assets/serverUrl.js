@@ -2,4 +2,6 @@
 // export const serverUrl = "https://blindd-server.onrender.com"
 
 
- export const serverUrl = "https://blinddserver-production.up.railway.app"
+// RAILWAY TRAIL EXPIRED SO CHANGING SERVERURL
+//  export const serverUrl = "https://blinddserver-production.up.railway.app"
+  export const serverUrl = "https://blinddserver-production-4754.up.railway.app"
