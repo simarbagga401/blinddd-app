@@ -1,4 +1,8 @@
 # Nuxt 3 Minimal Starter
+Preview : https://blinddd.netlify.app
+
+![blinddd](https://github.com/user-attachments/assets/b7bb49f3-c220-4b40-abfc-247daa22da79)
+
 
 Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
 live demo: https://blinddd.netlify.app
